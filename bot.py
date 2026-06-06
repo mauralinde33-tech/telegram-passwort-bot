@@ -7,6 +7,7 @@ from telegram.ext import (
     ContextTypes,
     filters,
 )
+import os
 
 PASSWORD = "blaue Blume"
 CHANNEL_ID = -1003872961450
@@ -68,7 +69,8 @@ async def check_password(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
-    app = Application.builder().token("BOT_TOKEN_HIER").build()
+    app = Application.builder().token(os.environ.get("TELEGRAM_TOKEN")).build()
+
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(ChatJoinRequestHandler(join_request))
